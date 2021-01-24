@@ -1,0 +1,116 @@
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  <meta charset="utf-8">
+    <title>HTML</title>
+    <style>
+    body{
+    background-image: url('20210124_005415_3.jpg');
+    }
+    /*video { max-width: 80%; display: block; margin: 20px auto; }*/
+    .d1{
+	mix-blend-mode: difference;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    margin: auto;
+    height: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+	}
+    h4 {
+    color:gold;
+    }
+a:link, a:visited {
+  background-color: gold;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  
+}
+
+a:hover, a:active {
+  background-color: gold;
+}
+    </style>
+  </head>
+  <body>
+      <body style="text-align: center">
+      HTML CSS JSResult Skip Results Iframe
+EDIT ON
+<script type="vertex" id="vs">
+        #version 300 es
+        
+        uniform vec2 u_mouse;
+        
+        layout (location=0) in vec3 aPosition;
+        layout (location=1) in vec3 aVelocity;
+        layout (location=2) in float mass;
+ 
+        out vec3 vPosition;
+        out vec3 vVelocity;
+ 
+        void main() {
+            vec3 position = aPosition;
+            vec3 velocity = aVelocity;
+            vec3 vmouse = vec3(u_mouse.xy, u_mouse.x);
+            vec3 acceleration =  vmouse - aPosition;
+            float dist = distance(acceleration, vmouse);
+            float gravity = (0.000997 * mass) / (dist * dist / 0.24);
+            acceleration *= gravity;
+            velocity += acceleration;
+            velocity *= 0.96;
+            vPosition = position + velocity;
+            vVelocity = velocity;
+            gl_PointSize = mass * 1.0;
+            gl_Position = vec4(aPosition, 1.0);
+        }
+    </script>
+    <script type="fragment" id="fs">
+        #version 300 es
+        precision highp float;
+        float density = 2.0;
+        const float LOG2 = 1.442695;
+        // https://www.geeks3d.com/20100228/fog-in-glsl-webgl/
+        out vec4 fragColor;
+        void main() {
+            float z = gl_FragCoord.z / gl_FragCoord.w;
+            float fogFactor = exp2(-density * density * z * z * z * LOG2);
+            fogFactor = clamp(fogFactor, 0.0, 1.0);
+            vec4 fogColor = vec4(1.0, 0.0, 1.0, 1.0);
+            fragColor = mix(fogColor, vec4(0.0, 1.0, 1.0, 1.0), fogFactor);
+        }
+    </script>
+    <canvas id="webgl-canvas"></canvas>
+
+
+
+Resources1× 0.5× 0.25×Rerun
+      
+    <!--
+    <img src="profil.png" width="700" height=auto>
+      -->
+    <!--  
+    <video muted autoplay loop>
+      <source src="videos/04.mp4" type="video/mp4">
+      <strong>Your browser does not support the video tag.</strong>
+    </video>
+    -->
+    <div id="d1"><h4><p>박성은 Song in Park</p>
+        <p>독일 바이마르의 Bauhaus Universität Weimar에서 시각디자인을 전공 중</p>
+    
+    </h4>
+    </div>
+	    <h4><a href="https://songinpark.tumblr.com">Portfolio</a></h4>
+	    <h4><a href="https://www.instagram.com/songinpark/">Instagram</a></h4>
+    
+  </body>
+</html>
