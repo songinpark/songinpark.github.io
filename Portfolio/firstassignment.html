@@ -92,7 +92,7 @@ EDIT ON
         }
     </script>
     <canvas id="webgl-canvas"></canvas>
-	      
+	      <script>
 	      let gl = createContext('webgl-canvas', (gl, cvs) => {
   gl.clearColor(0.1, 0.1, 0.1, 1);
   gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
@@ -349,6 +349,7 @@ function createContext(canvasId, settingsCallback) {
   } 
   return ctx;
 }
+	      </script>
 
 
 
