@@ -128,7 +128,16 @@ body {
                 animate();
             }, updateTime);
         }
-        function init();
+        function inittwo(){
+            window.addEventListener('resize', resizeCanvas, false);
+            resizeCanvas();
+            ball = new Ball(100, 20);            
+            //run animation
+            setInterval(function() {
+                animate();
+            }, updateTime);
+        
+        };
     </script>
 
 <div class="text">통통통</div>
