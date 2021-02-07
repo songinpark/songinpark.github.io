@@ -2,14 +2,16 @@
 <html>
     <html lang="ko">
 <head>
-    <title>Bouncy</title>
+    <title>Bouncing Ball</title>
     
 </head>
 <style>
 
+
 body {
         margin: 0;
         background-color: black;
+
     }
     #my-canvas {
         width: 100%;
@@ -17,7 +19,7 @@ body {
     }
 
     .text {
-  mix-blend-mode: difference;
+ mix-blend-mode: difference;
   position: absolute;
   top: 0;
   right: 0;
@@ -30,6 +32,11 @@ body {
   font-weight: bold;
   text-align: center;
   color:yellow;
+}
+.Ball{
+
+    mix-blend-mode: difference;
+
 }
 
     </style>
@@ -51,6 +58,22 @@ body {
         var _cos = Math.cos;
         var _random = Math.random;
         var oneDegreeOnRadian = _PI / 180;
+
+        var r = Math.floor(Math.random() * 255);
+        var g = Math.floor(Math.random() * 255);
+        var b = Math.floor(Math.random() * 255);
+        var col = "rgb(" + r + "," + g + "," + b + ")";
+
+        var r2 = Math.floor(Math.random() * 255);
+        var g2 = Math.floor(Math.random() * 255);
+        var b2 = Math.floor(Math.random() * 255);
+        var col2 = "rgb(" + r2 + "," + g2 + "," + b2 + ")";
+
+        var r3 = Math.floor(Math.random() * 255);
+        var g3 = Math.floor(Math.random() * 255);
+        var b3 = Math.floor(Math.random() * 255);
+        var col3 = "rgb(" + r3 + "," + g3 + "," + b3 + ")";
+        
     
         // ball
         var ball;
@@ -86,12 +109,35 @@ body {
             }
     
             this.draw = function() {
-                context.fillStyle = "Yellow"; // ball color
+                
+                //context.fillStyle = "Yellow"; // ball color 
+                context.fillStyle = col;
                 context.beginPath();
                 context.arc(this.x, this.y, this.radius, 0, _PI * 2, false); // draw circle
                 context.closePath();
                 context.fill(); // draw ball on canvas
             }
+
+            this.draw2 = function() {
+                
+                //context.fillStyle = "Yellow"; // ball color 
+                context.fillStyle = col2;
+                context.beginPath();
+                context.arc(this.x, this.y, this.radius, 0, _PI * 2, false); // draw circle
+                context.closePath();
+                context.fill(); // draw ball on canvas
+            }
+
+            this.draw3 = function() {
+                
+                //context.fillStyle = "Yellow"; // ball color 
+                context.fillStyle = col3;
+                context.beginPath();
+                context.arc(this.x, this.y, this.radius, 0, _PI * 2, false); // draw circle
+                context.closePath();
+                context.fill(); // draw ball on canvas
+            }
+
         }
     
         function clear() {
@@ -100,10 +146,14 @@ body {
     
         function update() {
             ball.move(); // move ball
+            ball2.move();
+            ball3.move();
         }
     
         function draw() {
             ball.draw();
+            ball2.draw2();
+            ball3.draw3();
         }
     
         function animate() {
@@ -122,13 +172,14 @@ body {
         function init() {
             window.addEventListener('resize', resizeCanvas, false);
             resizeCanvas();
-            ball = new Ball(100, 10);            
-            //run animation
+            ball = new Ball(100, 10);
+            ball2 = new Ball(100, 10);
+            ball3 = new Ball(100, 10);
+                        //run animation
             setInterval(function() {
                 animate();
             }, updateTime);
         }
-       
     </script>
 
 <div class="text">통통통</div>
