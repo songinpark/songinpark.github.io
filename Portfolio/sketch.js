@@ -41,24 +41,53 @@ function draw() {
 }
 
 
-loadSvg = function(url) {
-    return fetch(url)
-        .then(function(response) { return response.text(); })
-        .then(function(raw) { return (new window.DOMParser()).parseFromString(raw, 'image/svg+xml'); });
-};
+    if (typeof fetch !== 'undefined') {
+        var select = function(root, selector) {
+            return Array.prototype.slice.call(root.querySelectorAll(selector));
+        };
 
+        var loadSvg = function(url) {
+            return fetch(url)
+                .then(function(response) { return response.text(); })
+                .then(function(raw) { return (new window.DOMParser()).parseFromString(raw, 'image/svg+xml'); });
+        };
 
-loadSvg('./svg/e_spree.svg').then(function(root) {
-    var color = Common.choose(['#f19648', '#f5d259', '#f55a3c', '#063e7b', '#ececd1']);
-    
-    var vertexSets = select(root, 'path')
-        .map(function(path) { return Svg.pathToVertices(path, 30); });
+        ([
+            './svg/e_spree.svg', 
+            './svg/g_gera.svg',
+            './svg/g_gokyocheon.svg',
+            './svg/m_ilm.svg'
+        ]).forEach(function(path, i) { 
+            loadSvg(path).then(function(root) {
+                var color = Common.choose(['#f19648', '#f5d259', '#f55a3c', '#063e7b', '#ececd1']);
 
-    World.add(world, Bodies.fromVertices(400, 80, vertexSets, {
-        render: {
-            fillStyle: color,
-            strokeStyle: color,
-            lineWidth: 1
-        }
-    }, true));
-});
+                var vertexSets = select(root, 'path')
+                    .map(function(path) { return Vertices.scale(Svg.pathToVertices(path, 30), 0.4, 0.4); });
+
+                World.add(world, Bodies.fromVertices(100 + i * 150, 200 + i * 50, vertexSets, {
+                    render: {
+                        fillStyle: color,
+                        strokeStyle: color,
+                        lineWidth: 1
+                    }
+                }, true));
+            });
+        });
+
+        loadSvg('./svg/m_ilm.svg').then(function(root) {
+            var color = Common.choose(['#f19648', '#f5d259', '#f55a3c', '#063e7b', '#ececd1']);
+            
+            var vertexSets = select(root, 'path')
+                .map(function(path) { return Svg.pathToVertices(path, 30); });
+
+            World.add(world, Bodies.fromVertices(400, 80, vertexSets, {
+                render: {
+                    fillStyle: color,
+                    strokeStyle: color,
+                    lineWidth: 1
+                }
+            }, true));
+        });
+    } else {
+        Common.warn('Fetch is not available. Could not load SVG.');
+    }
