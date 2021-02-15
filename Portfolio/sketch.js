@@ -49,7 +49,7 @@ function draw() {
         var loadSvg = function(url) {
             return fetch(url)
                 .then(function(response) { return response.text(); })
-                //.then(function(raw) { return (new window.DOMParser()).parseFromString(raw, 'image/svg+xml'); });
+                .then(function(raw) { return (new window.DOMParser()).parseFromString(raw, 'image/svg+xml'); });
         };
 
         ([
