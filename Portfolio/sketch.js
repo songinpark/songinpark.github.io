@@ -53,10 +53,7 @@ function draw() {
         };
 
         ([
-            './svg/e_spree.svg', 
-            './svg/g_gera.svg',
-            './svg/g_gokyocheon.svg',
-            './svg/m_ilm.svg'
+            './svg/svg.svg'
         ]).forEach(function(path, i) { 
             loadSvg(path).then(function(root) {
                 var color = Common.choose(['#f19648', '#f5d259', '#f55a3c', '#063e7b', '#ececd1']);
@@ -74,7 +71,7 @@ function draw() {
             });
         });
 
-        loadSvg('./svg/m_ilm.svg').then(function(root) {
+        loadSvg('./svg/svg.svg').then(function(root) {
             var color = Common.choose(['#f19648', '#f5d259', '#f55a3c', '#063e7b', '#ececd1']);
             
             var vertexSets = select(root, 'path')
