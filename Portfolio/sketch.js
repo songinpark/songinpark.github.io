@@ -21,7 +21,7 @@ var options = {
 var loadSvg;
 
 function setup(){
-    createCanvas (400, 400);
+    createCanvas (1920, 1080);
     engine = Engine.create();
     world = engine.world;
     boxy = Bodies.rectangle(200, 100, 80, 80);
